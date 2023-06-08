@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native'
 import React from 'react'
 
-const EditDelete = () => {
+const EditDelete = ({navigation, route}) => {
+    const { todolist } = route.params;
     return (
         <View>
             {/* <Text>EditDelete</Text> */}
@@ -22,6 +23,7 @@ const EditDelete = () => {
                 <TextInput
                     editable
                     multiline
+                    value={todolist}
                     
                 />
             </View>

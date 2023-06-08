@@ -20,6 +20,10 @@ const HomeScreen = ({ navigation, route }) => {
         // Perform the action when the todolist is rendered or updated
         console.log('Todolist rendered:', todolist);
       }, [todolist]);
+
+      const handleTodoPress=(selectedTodo)=>{
+        navigation.navigate("EditDelete", {todolist: selectedTodo});
+      }
     return (
         <View>
             <StatusBar style="auto" />
@@ -34,7 +38,7 @@ const HomeScreen = ({ navigation, route }) => {
                 <View>
                     {/* Render each todo item */}
                     {todolist.map((todolist, index) => (
-                        <TouchableOpacity key={index} style={styles.todolist} onPress={() => navigation.navigate("EditDelete")}>
+                        <TouchableOpacity key={index} style={styles.todolist} onPress={() => handleTodoPress(todolist)}>
                             <Text>
                                 sample : {index} {todolist ? todolist : 'No todo'}
                             </Text>
