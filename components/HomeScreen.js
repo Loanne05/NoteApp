@@ -34,7 +34,7 @@ const HomeScreen = ({ navigation, route }) => {
                 <View>
                     {/* Render each todo item */}
                     {todolist.map((todolist, index) => (
-                        <TouchableOpacity key={index} style={styles.todolist}>
+                        <TouchableOpacity key={index} style={styles.todolist} onPress={() => navigation.navigate("EditDelete")}>
                             <Text>
                                 sample : {index} {todolist ? todolist : 'No todo'}
                             </Text>

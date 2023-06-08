@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './components/HomeScreen';
 import AddTodo from './components/AddTodo';
+import EditDelete from './components/EditDelete';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
       <Stack.Navigator screenOptions={globalScreenOptions}>
         <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="Add" component={AddTodo}/>
+        <Stack.Screen name="EditDelete" component={EditDelete}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
