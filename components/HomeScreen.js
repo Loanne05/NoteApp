@@ -19,11 +19,23 @@ const HomeScreen = ({ navigation, route }) => {
     useEffect(() => {
         // Perform the action when the todolist is rendered or updated
         console.log('Todolist rendered:', todolist);
-      }, [todolist]);
+    }, [todolist]);
 
-      const handleTodoPress=(selectedTodo)=>{
-        navigation.navigate("EditDelete", {todolist: selectedTodo});
-      }
+    {/* pass the value of todolist and index to EditDeleteScreen */}
+    const handleTodoPress = (selectedTodo, index) => {
+        navigation.navigate("EditDelete", { todolist: selectedTodo, index: index });
+    }
+
+    //updates the updated todo
+    useEffect(() => {
+        if (route.params?.updatedTodo !== undefined && route.params?.index !== undefined) {
+          const { updatedTodo, index } = route.params;
+          const updatedTodolist = [...todolist]; //made a copy of destructured todolist 
+          updatedTodolist[index] = updatedTodo;
+          console.log(updatedTodolist[index], index);
+          setTodolist(updatedTodolist);
+        }
+      }, [route.params]);
     return (
         <View>
             <StatusBar style="auto" />
@@ -37,10 +49,10 @@ const HomeScreen = ({ navigation, route }) => {
             >
                 <View>
                     {/* Render each todo item */}
-                    {todolist.map((todolist, index) => (
-                        <TouchableOpacity key={index} style={styles.todolist} onPress={() => handleTodoPress(todolist)}>
+                    {todolist.map((todo, index) => (
+                        <TouchableOpacity key={index} style={styles.todolist} onPress={() => handleTodoPress(todo, index)}>
                             <Text>
-                                sample : {index} {todolist ? todolist : 'No todo'}
+                                sample : {index} {todo ? todo : 'No todo'}
                             </Text>
                         </TouchableOpacity>
                     ))}

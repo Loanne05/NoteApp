@@ -1,13 +1,27 @@
 import { StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-const EditDelete = ({navigation, route}) => {
-    const { todolist } = route.params;
+const EditDelete = ({ navigation, route }) => {
+    const { todolist, index } = route.params; //access from the HomeScreen (function handleTodoPress)
+    const [editinput, setEditInput] = useState("");
+
+    useEffect(() => {
+        setEditInput(todolist); // Set the initial value of editinput to todolist
+    }, [todolist]);
+
+    {/*passing the updatedTodo and index values as parameters to HomeScreen*/}
+    const handleSaveEdit = () => {
+        navigation.navigate("Home", {updatedTodo: editinput, index: index});
+    }
+
     return (
         <View>
             {/* <Text>EditDelete</Text> */}
-            <View style={{ flexDirection: 'row', justifyContent:'space-around' }}>
-                <TouchableOpacity style={styles.save}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <TouchableOpacity
+                    style={styles.save}
+                    onPress={handleSaveEdit}
+                >
                     <Text style={{ color: 'white' }}>
                         Save
                     </Text>
@@ -23,8 +37,9 @@ const EditDelete = ({navigation, route}) => {
                 <TextInput
                     editable
                     multiline
-                    value={todolist}
-                    
+                    value={editinput}
+                    onChangeText={setEditInput}
+                    paddingLeft={10}
                 />
             </View>
         </View>
