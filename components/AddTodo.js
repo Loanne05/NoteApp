@@ -31,7 +31,8 @@ const AddTodo = ({ navigation, route }) => {
                     placeholder='Tasks to do ...'
                     value={input}
                     onChangeText={setInput}
-                    paddingLeft={10}
+                    paddingLeft={15}
+                    paddingTop={10}
                 />
             </View>
         </View>
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     todoinput: {
         borderBottomColor: 'black',
         borderWidth: 2,
+        borderRadius: 8,
         paddingBottom: 600,
         marginHorizontal: 15,
         marginTop: 20

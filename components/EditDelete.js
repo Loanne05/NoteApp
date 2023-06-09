@@ -14,6 +14,10 @@ const EditDelete = ({ navigation, route }) => {
         navigation.navigate("Home", {updatedTodo: editinput, index: index});
     }
 
+    const handleDelete = () => {
+        navigation.navigate("Home", {deletedTodo: index});
+    }
+
     return (
         <View>
             {/* <Text>EditDelete</Text> */}
@@ -26,7 +30,9 @@ const EditDelete = ({ navigation, route }) => {
                         Save
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.delete}>
+                <TouchableOpacity 
+                    style={styles.delete}
+                    onPress={handleDelete}>
                     <Text>
                         Delete
                     </Text>
@@ -39,7 +45,8 @@ const EditDelete = ({ navigation, route }) => {
                     multiline
                     value={editinput}
                     onChangeText={setEditInput}
-                    paddingLeft={10}
+                    paddingLeft={15}
+                    paddingTop={10}
                 />
             </View>
         </View>
@@ -69,6 +76,7 @@ const styles = StyleSheet.create({
     todoinput: {
         borderBottomColor: 'black',
         borderWidth: 2,
+        borderRadius: 8,
         paddingBottom: 600,
         marginHorizontal: 15,
         marginTop: 20

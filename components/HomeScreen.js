@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation, route }) => {
         navigation.navigate("EditDelete", { todolist: selectedTodo, index: index });
     }
 
-    //updates the updated todo
+    //updates the updated and deleted to do every render 
     useEffect(() => {
         if (route.params?.updatedTodo !== undefined && route.params?.index !== undefined) {
           const { updatedTodo, index } = route.params;
@@ -34,6 +34,12 @@ const HomeScreen = ({ navigation, route }) => {
           updatedTodolist[index] = updatedTodo;
           console.log(updatedTodolist[index], index);
           setTodolist(updatedTodolist);
+        }
+        if(route.params?.deletedTodo !== undefined){
+            const {deletedTodo} = route.params;
+            const updateDeletedTodo= [...todolist];
+            updateDeletedTodo.splice(deletedTodo, 1); // delete todo 
+            setTodolist(updateDeletedTodo);
         }
       }, [route.params]);
     return (
@@ -52,7 +58,7 @@ const HomeScreen = ({ navigation, route }) => {
                     {todolist.map((todo, index) => (
                         <TouchableOpacity key={index} style={styles.todolist} onPress={() => handleTodoPress(todo, index)}>
                             <Text>
-                                sample : {index} {todo ? todo : 'No todo'}
+                                {index} {todo ? todo : 'No todo'}
                             </Text>
                         </TouchableOpacity>
                     ))}
